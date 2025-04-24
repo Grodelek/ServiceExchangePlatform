@@ -1,7 +1,6 @@
 package com.serviceexchange.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,7 @@ public class Ban {
 
     @Id
     @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private LocalDateTime startDate;
@@ -23,4 +23,8 @@ public class Ban {
     private LocalDateTime endDate;
 
     private String reason;
+
+    @ManyToOne
+    private User user;
+
 }

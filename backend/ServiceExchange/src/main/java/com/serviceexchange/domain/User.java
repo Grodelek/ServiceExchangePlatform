@@ -6,16 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
 
     @Id
     @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
@@ -33,9 +36,17 @@ public class User {
     @Column(nullable = false)
     private LocalDate birthDate;
 
-    @OneToMany
-    private List<Ban> bans;
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Ban> bans = new ArrayList<>();
 
     @ManyToMany
-    private List<Match> matches;
+    private List<Match> matches = new ArrayList<>();
+
+    @ManyToMany
+    private List<Specialization> specializations = new ArrayList<>();
 }
