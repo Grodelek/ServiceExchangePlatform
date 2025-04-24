@@ -1,15 +1,15 @@
 package com.serviceexchange.service;
 
 import java.util.List;
-
+import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.serviceexchange.domain.User;
 import com.serviceexchange.dto.UserDTO;
 import com.serviceexchange.repository.UserRepository;
 
+@Service
 public class UserService {
   private final UserRepository userRepository;
 
